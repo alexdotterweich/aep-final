@@ -1,4 +1,4 @@
-<project name="board" basedir="." default="test">
+<project name="aepFinalProject" basedir="." default="test">
 
     <path id="test.classpath">
         <pathelement path="target/classes"/>
