@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_aepfinalproject" default="compile.module.aepfinalproject">
+  <dirname property="module.aepfinalproject.basedir" file="${ant.file.module_aepfinalproject}"/>
+  
+  <property name="module.jdk.home.aepfinalproject" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.aepfinalproject" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.aepfinalproject" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.aepfinalproject" value="-encoding UTF-8 -source 1.7 -target 1.7 ${compiler.args}"/>
+  
+  <property name="aepfinalproject.output.dir" value="${module.aepfinalproject.basedir}/out/production/aepFinalProject"/>
+  <property name="aepfinalproject.testoutput.dir" value="${module.aepfinalproject.basedir}/out/test/aepFinalProject"/>
+  
+  <path id="aepfinalproject.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="aepfinalproject.module.production.classpath">
+    <path refid="${module.jdk.classpath.aepfinalproject}"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/jcommander.jar"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/testng.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+  </path>
+  
+  <path id="aepfinalproject.runtime.production.module.classpath">
+    <pathelement location="${aepfinalproject.output.dir}"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/jcommander.jar"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/testng.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+  </path>
+  
+  <path id="aepfinalproject.module.classpath">
+    <path refid="${module.jdk.classpath.aepfinalproject}"/>
+    <pathelement location="${aepfinalproject.output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/jcommander.jar"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/testng.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+  </path>
+  
+  <path id="aepfinalproject.runtime.module.classpath">
+    <pathelement location="${aepfinalproject.testoutput.dir}"/>
+    <pathelement location="${aepfinalproject.output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/jcommander.jar"/>
+    <pathelement location="${idea.home}/plugins/testng/lib/testng.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.12.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.aepfinalproject">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.aepfinalproject">
+    <patternset refid="excluded.from.module.aepfinalproject"/>
+  </patternset>
+  
+  <path id="aepfinalproject.module.sourcepath">
+    <dirset dir="${module.aepfinalproject.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  <path id="aepfinalproject.module.test.sourcepath">
+    <dirset dir="${module.aepfinalproject.basedir}">
+      <include name="test"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.aepfinalproject" depends="compile.module.aepfinalproject.production,compile.module.aepfinalproject.tests" description="Compile module aepFinalProject"/>
+  
+  <target name="compile.module.aepfinalproject.production" depends="register.custom.compilers" description="Compile module aepFinalProject; production classes">
+    <mkdir dir="${aepfinalproject.output.dir}"/>
+    <javac2 destdir="${aepfinalproject.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.aepfinalproject}/javac">
+      <compilerarg line="${compiler.args.aepfinalproject}"/>
+      <bootclasspath refid="aepfinalproject.module.bootclasspath"/>
+      <classpath refid="aepfinalproject.module.production.classpath"/>
+      <src refid="aepfinalproject.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.aepfinalproject"/>
+    </javac2>
+    
+    <copy todir="${aepfinalproject.output.dir}">
+      <fileset dir="${module.aepfinalproject.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.aepfinalproject.tests" depends="register.custom.compilers,compile.module.aepfinalproject.production" description="compile module aepFinalProject; test classes" unless="skip.tests">
+    <mkdir dir="${aepfinalproject.testoutput.dir}"/>
+    <javac2 destdir="${aepfinalproject.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.aepfinalproject}/javac">
+      <compilerarg line="${compiler.args.aepfinalproject}"/>
+      <bootclasspath refid="aepfinalproject.module.bootclasspath"/>
+      <classpath refid="aepfinalproject.module.classpath"/>
+      <src refid="aepfinalproject.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.aepfinalproject"/>
+    </javac2>
+    
+    <copy todir="${aepfinalproject.testoutput.dir}">
+      <fileset dir="${module.aepfinalproject.basedir}/test">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.aepfinalproject" description="cleanup module">
+    <delete dir="${aepfinalproject.output.dir}"/>
+    <delete dir="${aepfinalproject.testoutput.dir}"/>
+  </target>
+</project>
