@@ -11,7 +11,6 @@ public class Board {
         this.board = Arrays.asList(" ", " ", " ", " ", " ", " ", " ", " ", " ");
     }
 
-
     public List getBoard() {
         return board;
     }
