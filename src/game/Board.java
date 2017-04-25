@@ -46,8 +46,8 @@ public class Board {
         }
 
         else if (((row + 1) % 3) == 0) {
-            if (board.get(col + (row+1)) == " ") {
-                board.set(col, "X");
+            if (board.get(col + (row+4)) == " ") {
+                board.set((col + (row+4)), "X");
                 printBoard();
             } else {
                 System.out.print("Square already filled, please try again" + "\n");
