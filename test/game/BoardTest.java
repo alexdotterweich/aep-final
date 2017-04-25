@@ -25,5 +25,13 @@ public class BoardTest {
         assertEquals(newBoard.getBoard(), boardFilledR0C0);
     }
 
+    @Test
+    public void boardShouldSetSquareR1C2() {
+        Board newBoard = new Board();
+        newBoard.setBoard(1, 2);
+        List<String> boardFilledR1C2 = Arrays.asList(" ", " ", " ", " ", " ", "X", " ", " ", " ");
+        assertEquals(newBoard.getBoard(), boardFilledR1C2);
+    }
+
 
 }

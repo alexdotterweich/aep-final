@@ -39,8 +39,7 @@ public class Board {
 
         else if (((row + 2) % 3) == 0) {
             if (board.get(col + (row+2)) == " ") {
-                board.set(col, "X");
-                printBoard();
+                board.set((col + (row+2)), "X");
             } else {
                 System.out.print("Square already filled, please try again" + "\n");
             }
