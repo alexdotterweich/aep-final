@@ -16,4 +16,14 @@ public class BoardTest {
         List<String> emptyBoard = Arrays.asList(" ", " ", " ", " ", " ", " ", " ", " ", " ");
         assertEquals(newBoard.getBoard(), emptyBoard);
     }
+
+    @Test
+    public void boardShouldSetSquareR0C0() {
+        Board newBoard = new Board();
+        newBoard.setBoard(0, 0);
+        List<String> boardFilledR0C0 = Arrays.asList("X", " ", " ", " ", " ", " ", " ", " ", " ");
+        assertEquals(newBoard.getBoard(), boardFilledR0C0);
+    }
+
+
 }
