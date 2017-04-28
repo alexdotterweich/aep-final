@@ -1,6 +1,5 @@
 package game;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 // Understands how to play the game in the command line
 public class Player {
@@ -9,12 +8,8 @@ public class Player {
     protected int row;
     protected int col;
 
-    public Player() {
-        this.row = row;
-        this.col = col;
-    }
 
-    public int valueAsker(String colOrRow) {
+    protected int valueAsker(String colOrRow) {
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Choose the " + colOrRow + " you would like to select from 0 - 2" + "\n");
         int userValue = reader.nextInt();
@@ -29,19 +24,20 @@ public class Player {
         return userValue;
     }
 
-    public String playerOpposite() {
+    protected Player playerOpposite() {
         if (playerType == "X") {
-            return "O";
-        } return "X";
+            Player playerO = new Player();
+            playerO.playerType = "O";
+            return playerO;
+        } return new Player();
     }
 
-
     // checks to see if next move will result in the player winning
-    public int willPlayerWin(Board b, String playerType) {
+    protected int willPlayerWin(Board b, String playerType) {
         for(int i = 0; i < 9 ; i++) {
             if (b.board.get(i) == " ") {
                 b.board.set(i, playerType);
-                if (b.gameOver(this)) {
+                if (b.gameOver(this) || b.gameOver(playerOpposite())) {
                     b.board.set(i, " ");
                     return i;
                 } b.board.set(i, " ");
@@ -49,7 +45,7 @@ public class Player {
         } return -1;
     }
 
-    public int ai(Board b){
+    protected int ai(Board b){
         if (willPlayerWin(b, "O") != -1) {
             return willPlayerWin(b, "O");
         } if (willPlayerWin(b, "X") != -1) {
@@ -68,9 +64,9 @@ public class Player {
                 System.out.print("Game Over! Try again next time" + "\n");
             }
 
+            // still can't get values to be entered via command line, will try to create gui
             System.out.print("Please choose a row" + "\n");
             valueAsker("row");
-
             System.out.print("Please choose a column" + "\n");
             valueAsker("col");
 
@@ -83,7 +79,7 @@ public class Player {
             if (b.boardFull()){
                 b.printBoard();
                 System.out.print("Tie Game. Better luck next time." + "\n");
-            } return play(b, "0");
+            } return play(b, "O");
 
         } else if (player == "O"){
             if (b.gameOver(this)) {
@@ -94,6 +90,5 @@ public class Player {
             return play(b, "X");
         } return -1;
     }
-
 }
 

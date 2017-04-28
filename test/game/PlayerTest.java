@@ -22,12 +22,11 @@ public class PlayerTest {
 //    public void playingTheGame() {
 //        Board b = new Board();
 //        Player p = new Player();
-//
 //        assertEquals(p.play(b, "X"), -1);
 //    }
 
-    //I had to manually perform the functionality of the play() method here since
-    //that's a recursive method that relies on user input
+    // I had to manually perform the functionality of the play() method here since
+    // that's a recursive method that relies on user input
     @Test
     public void ifItIsTheAIsTurnItShouldMakeAStategicMove() {
         Board b = new Board();
@@ -42,6 +41,18 @@ public class PlayerTest {
 
     @Test
     public void AIShouldBeAbleToWinTheGame() {
-
+        Board b = new Board();
+        Player p = new Player();
+        b.setBoard(1, 1, p);
+        p.playerType = "O";
+        int aiResponse = p.ai(b);
+        b.setBoard(aiResponse/3, aiResponse%3, p);
+        p.playerType = "X";
+        b.setBoard(0, 1, p);
+        p.playerType = "O";
+        int aiResponse2 = p.ai(b);
+        b.setBoard(aiResponse2/3, aiResponse2%3, p);
+        List<String> newBoard = Arrays.asList("O", "X", " ", " ", "X", " ", " ", "O", " ");
+        assertEquals(newBoard, b.board);
     }
 }
