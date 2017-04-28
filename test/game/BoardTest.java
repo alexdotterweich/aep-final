@@ -41,5 +41,13 @@ public class BoardTest {
         assertEquals(newBoard.getBoard(), boardFilledR2C1);
     }
 
+    @Test
+    public void gameShouldBeOverWhenDiagonalXSLineUp() {
+        Board newBoard = new Board();
+        newBoard.setBoard(0, 0);
+        newBoard.setBoard(1, 1);
+        newBoard.setBoard(2, 2);
+        assertTrue(newBoard.gameOver());
+    }
 
 }

@@ -19,10 +19,11 @@ public class Board {
         System.out.print("---------------------------" + '\n');
         System.out.print("   0 1 2   Cols" + "\n");
         System.out.print("\n");
-        int rows = board.size() / 3;
-        for (int i = 0; i < rows; i++) {
-            System.out.print(i + "  " + board.get(i) + "|" + board.get(i + 1) + "|" + board.get(i + 2) + "\n");
-        }
+        System.out.print(0 + "  " + board.get(0) + "|" + board.get(1) + "|" + board.get(2) + "\n");
+        System.out.print("   -----" + "\n");
+        System.out.print(1 + "  " + board.get(3) + "|" + board.get(4) + "|" + board.get(5) + "\n");
+        System.out.print("   -----" + "\n");
+        System.out.print(2 + "  " + board.get(6) + "|" + board.get(7) + "|" + board.get(8) + "\n");
         System.out.print("\n" + "Rows" + "\n");
         System.out.print("---------------------------" + "\n");
     }
@@ -57,4 +58,41 @@ public class Board {
             System.out.print("Not a valid selection, please try again" + "\n");
         }
     }
+
+    public boolean gameOver() {
+        if ((board.get(0) == "X") & (board.get(1) == "X") & (board.get(2) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(3) == "X") & (board.get(4) == "X") & (board.get(5) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(6) == "X") & (board.get(7) == "X") & (board.get(8) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(0) == "X") & (board.get(3) == "X") & (board.get(6) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(1) == "X") & (board.get(4) == "X") & (board.get(7) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(2) == "X") & (board.get(5) == "X") & (board.get(8) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(0) == "X") & (board.get(4) == "X") & (board.get(8) == "X")) {
+            return true;
+        }
+
+        else if ((board.get(2) == "X") & (board.get(4) == "X") & (board.get(6) == "X")) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
