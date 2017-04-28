@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 // Understands how to setup and retrieve board information, knows when the game is over
 public class Board {
-    private List<String> board;
+    protected List<String> board;
 
     protected Board() {
         this.board = Arrays.asList(" ", " ", " ", " ", " ", " ", " ", " ", " ");
@@ -93,6 +93,14 @@ public class Board {
         }
 
         return false;
+    }
+
+    public boolean boardFull() {
+        for (int i = 0 ; i < board.size(); i ++) {
+            if (board.get(i) == " ") {
+                return false;
+            }
+        } return true;
     }
 
 }

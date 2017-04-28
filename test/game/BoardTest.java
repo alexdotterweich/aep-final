@@ -58,4 +58,19 @@ public class BoardTest {
         newBoard.setBoard(2, 2);
         assertTrue(newBoard.gameOver());
     }
+
+    @Test
+    public void gameShouldBeOverWhenBoardIsFull() {
+        Board newBoard = new Board();
+        newBoard.setBoard(0, 0);
+        newBoard.setBoard(0, 1);
+        newBoard.setBoard(0, 2);
+        newBoard.setBoard(1, 0);
+        newBoard.setBoard(1, 1);
+        newBoard.setBoard(1, 2);
+        newBoard.setBoard(2, 0);
+        newBoard.setBoard(2, 1);
+        newBoard.setBoard(2, 2);
+        assertTrue(newBoard.boardFull());
+    }
 }
