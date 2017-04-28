@@ -42,7 +42,7 @@ public class BoardTest {
     }
 
     @Test
-    public void gameShouldBeOverWhenDiagonalXSLineUp() {
+    public void gameShouldBeOverWhen3DiagonalXSLineUp() {
         Board newBoard = new Board();
         newBoard.setBoard(0, 0);
         newBoard.setBoard(1, 1);
@@ -50,4 +50,12 @@ public class BoardTest {
         assertTrue(newBoard.gameOver());
     }
 
+    @Test
+    public void gameShouldBeOverWhen3LinearXSLineUp() {
+        Board newBoard = new Board();
+        newBoard.setBoard(2, 0);
+        newBoard.setBoard(2, 1);
+        newBoard.setBoard(2, 2);
+        assertTrue(newBoard.gameOver());
+    }
 }
