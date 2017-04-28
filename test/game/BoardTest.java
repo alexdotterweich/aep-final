@@ -7,7 +7,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class BoardTest {
     @Test
@@ -20,7 +19,8 @@ public class BoardTest {
     @Test
     public void boardShouldSetSquareR0C0() {
         Board newBoard = new Board();
-        newBoard.setBoard(0, 0);
+        Player p = new Player();
+        newBoard.setBoard(0, 0, p);
         List<String> boardFilledR0C0 = Arrays.asList("X", " ", " ", " ", " ", " ", " ", " ", " ");
         assertEquals(newBoard.getBoard(), boardFilledR0C0);
     }
@@ -28,7 +28,8 @@ public class BoardTest {
     @Test
     public void boardShouldSetSquareR1C2() {
         Board newBoard = new Board();
-        newBoard.setBoard(1, 2);
+        Player p = new Player();
+        newBoard.setBoard(1, 2, p);
         List<String> boardFilledR1C2 = Arrays.asList(" ", " ", " ", " ", " ", "X", " ", " ", " ");
         assertEquals(newBoard.getBoard(), boardFilledR1C2);
     }
@@ -36,7 +37,8 @@ public class BoardTest {
     @Test
     public void boardShouldSetSquareR2C1() {
         Board newBoard = new Board();
-        newBoard.setBoard(2, 1);
+        Player p = new Player();
+        newBoard.setBoard(2, 1, p);
         List<String> boardFilledR2C1 = Arrays.asList(" ", " ", " ", " ", " ", " ", " ", "X", " ");
         assertEquals(newBoard.getBoard(), boardFilledR2C1);
     }
@@ -44,33 +46,36 @@ public class BoardTest {
     @Test
     public void gameShouldBeOverWhen3DiagonalXSLineUp() {
         Board newBoard = new Board();
-        newBoard.setBoard(0, 0);
-        newBoard.setBoard(1, 1);
-        newBoard.setBoard(2, 2);
-        assertTrue(newBoard.gameOver());
+        Player p = new Player();
+        newBoard.setBoard(0, 0, p);
+        newBoard.setBoard(1, 1, p);
+        newBoard.setBoard(2, 2, p);
+        assertTrue(newBoard.gameOver(p));
     }
 
     @Test
     public void gameShouldBeOverWhen3LinearXSLineUp() {
         Board newBoard = new Board();
-        newBoard.setBoard(2, 0);
-        newBoard.setBoard(2, 1);
-        newBoard.setBoard(2, 2);
-        assertTrue(newBoard.gameOver());
+        Player p = new Player();
+        newBoard.setBoard(2, 0, p);
+        newBoard.setBoard(2, 1, p);
+        newBoard.setBoard(2, 2, p);
+        assertTrue(newBoard.gameOver(p));
     }
 
     @Test
     public void gameShouldBeOverWhenBoardIsFull() {
         Board newBoard = new Board();
-        newBoard.setBoard(0, 0);
-        newBoard.setBoard(0, 1);
-        newBoard.setBoard(0, 2);
-        newBoard.setBoard(1, 0);
-        newBoard.setBoard(1, 1);
-        newBoard.setBoard(1, 2);
-        newBoard.setBoard(2, 0);
-        newBoard.setBoard(2, 1);
-        newBoard.setBoard(2, 2);
+        Player p = new Player();
+        newBoard.setBoard(0, 0, p);
+        newBoard.setBoard(0, 1, p);
+        newBoard.setBoard(0, 2, p);
+        newBoard.setBoard(1, 0, p);
+        newBoard.setBoard(1, 1, p);
+        newBoard.setBoard(1, 2, p);
+        newBoard.setBoard(2, 0, p);
+        newBoard.setBoard(2, 1, p);
+        newBoard.setBoard(2, 2, p);
         assertTrue(newBoard.boardFull());
     }
 }

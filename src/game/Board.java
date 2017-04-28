@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Board {
     protected List<String> board;
 
-    protected Board() {
+    public Board() {
         this.board = Arrays.asList(" ", " ", " ", " ", " ", " ", " ", " ", " ");
     }
 
@@ -28,10 +28,15 @@ public class Board {
         System.out.print("---------------------------" + "\n");
     }
 
-    public void setBoard(int row, int col) {
+    public int getIndex(int row, int col) {
+        return col / 3 + row - row % 3;
+    }
+
+
+    public void setBoard(int row, int col, Player p) {
         if (((row + 3) % 3) == 0) { //in the first row of board
             if (board.get(col) == " ") { //board is empty at place
-                board.set(col, "X");
+                board.set(col, p.playerType);
                 printBoard();
             } else {
                 System.out.print("Square already filled, please try again" + "\n");
@@ -40,7 +45,7 @@ public class Board {
 
         else if (((row + 2) % 3) == 0) {
             if (board.get(col + (row+2)) == " ") {
-                board.set((col + (row+2)), "X");
+                board.set((col + (row+2)), p.playerType);
             } else {
                 System.out.print("Square already filled, please try again" + "\n");
             }
@@ -48,7 +53,7 @@ public class Board {
 
         else if (((row + 1) % 3) == 0) {
             if (board.get(col + (row+4)) == " ") {
-                board.set((col + (row+4)), "X");
+                board.set((col + (row+4)), p.playerType);
                 printBoard();
             } else {
                 System.out.print("Square already filled, please try again" + "\n");
@@ -59,28 +64,28 @@ public class Board {
         }
     }
 
-    public boolean gameOver() {
-        if ((board.get(0) == "X") & (board.get(1) == "X") & (board.get(2) == "X")) {
+    public boolean gameOver(Player p) {
+        if ((board.get(0) == p.playerType) & (board.get(1) == p.playerType) & (board.get(2) == p.playerType)) {
             return true;
         }
 
-        else if ((board.get(3) == "X") & (board.get(4) == "X") & (board.get(5) == "X")) {
+        else if ((board.get(3) == p.playerType) & (board.get(4) == p.playerType) & (board.get(5) == p.playerType)) {
             return true;
         }
 
-        else if ((board.get(6) == "X") & (board.get(7) == "X") & (board.get(8) == "X")) {
+        else if ((board.get(6) == p.playerType) & (board.get(7) == p.playerType) & (board.get(8) == p.playerType)) {
             return true;
         }
 
-        else if ((board.get(0) == "X") & (board.get(3) == "X") & (board.get(6) == "X")) {
+        else if ((board.get(0) == p.playerType) & (board.get(3) == p.playerType) & (board.get(6) == p.playerType)) {
             return true;
         }
 
-        else if ((board.get(1) == "X") & (board.get(4) == "X") & (board.get(7) == "X")) {
+        else if ((board.get(1) == p.playerType) & (board.get(4) == p.playerType) & (board.get(7) == p.playerType)) {
             return true;
         }
 
-        else if ((board.get(2) == "X") & (board.get(5) == "X") & (board.get(8) == "X")) {
+        else if ((board.get(2) == p.playerType) & (board.get(5) == "X") & (board.get(8) == "X")) {
             return true;
         }
 
